@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Job Postings with Timers</title>
+<style>
+  body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    margin: 0;
+    padding: 0;
+  }
+  .job-posting {
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    margin: 20px auto;
+    padding: 20px;
+    max-width: 600px;
+  }
+  .job-title {
+    font-size: 24px;
+    color: #333;
+  }
+  .job-deadline {
+    font-size: 16px;
+    color: #ff6347; /* Tomato Red */
+    margin-top: 10px;
+  }
+  .job-timer {
+    font-size: 18px;
+    color: #333;
+    margin-top: 10px;
+  }
+</style>
+</head>
+<body>
+<div class="job-posting">
+  <h2 class="job-title">Frontend Developer</h2>
+  <p class="job-deadline">Deadline: April 15, 2024</p>
+  <p class="job-timer" id="job-timer"></p>
+</div>
+
+<script>
+  
+  function updateTimer() {
+    // Set the deadline
+    var deadline = new Date("April 15, 2024 23:59:59").getTime();
+
+    
+    var now = new Date().getTime();
+    
+    
+    var distance = deadline - now;
+    
+   
+    if (distance <= 0) {
+      clearInterval(timerInterval);
+      document.getElementById("job-timer").innerHTML = "EXPIRED";
+      return;
+    }
+    
+  
+    var days = Math.floor(distance / (1000 * 60 * 60 * 24));
+    var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+    var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+    var seconds = Math.floor((distance % (1000 * 60)) / 1000);
+    
+    
+    document.getElementById("job-timer").innerHTML = "Deadline Countdown: " + days + "d " + hours + "h " + minutes + "m " + seconds + "s ";
+  }
+
+
+  updateTimer();
+
+  
+  var timerInterval = setInterval(updateTimer, 1000);
+</script>
+</body>
+</html>
